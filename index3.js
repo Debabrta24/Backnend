@@ -6,7 +6,7 @@ const bookStore = [
     {
         id: 1,
         name: "harry potter",
-        auther: "DevFlux"
+        author: "DevFlux"
     },
     {
         id: 2,
@@ -22,7 +22,7 @@ const bookStore = [
 app.get("/book", (req, res) => {
     res.send(bookStore)
 })
-app.patch("/book", (req, res) => {
+app.patch("/book", (req, res) => { // for updating single things  at once we use it 
     res.send("Patch updated")
     const id1 = req.body.id
     const Book = bookStore.find(info => info.id === id1)
@@ -34,7 +34,29 @@ app.patch("/book", (req, res) => {
     }
     console.log(bookStore)
 })
+app.put("/book", (req, res) => { // for updating multiple things  at once we use it 
 
+    const id1 = req.body.id
+    const Book = bookStore.find(info => info.id === id1)
+    Book.author = req.body.author
+    Book.name = req.body.name
+    res.send("Patch updated")
+})
+
+app.delete("/book/:id", (req, res) => {
+    const id = parseInt(req.params.id)
+    const index = bookStore.findIndex(info => info.id === id)
+    console.log(index)
+    bookStore.splice(index, 1);
+    res.send("deleted sucessfully")
+})
+
+app.get("/book1", (req, res) => {
+    console.log(req.query.author)
+    const book =bookStore.filter(info => info.author === req.query.author)
+    console.log(book)
+    res.send(book)
+})
 app.listen(3000, () => {
     console.log("server started")
 })
