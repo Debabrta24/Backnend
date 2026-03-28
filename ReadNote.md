@@ -1,3 +1,5 @@
+<!-- creating first server  ....1 -->
+
 const express = require("express")
 const app = express()
 
@@ -25,3 +27,6 @@ app.use("/", (req, res) => {
 app.listen(3000, () => {
     console.log("listing as port 3000")
 })
+
+<!-- lecture note 2 -->
+
