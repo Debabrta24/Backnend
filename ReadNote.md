@@ -30,3 +30,4 @@ app.listen(3000, () => {
 
 <!-- lecture note 2 -->
 
+json  & java script obj both are difference 
