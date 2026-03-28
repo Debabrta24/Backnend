@@ -12,12 +12,6 @@ const bookStore = [
         id: 2,
         name: "Friends",
         author: "Vikash"
-    },
-    {
-        id: 2,
-        name: "Nexus",
-        author: "Rohit"
-
     }, {
         id: 3,
         name: "premKhani",
@@ -25,20 +19,22 @@ const bookStore = [
 
     }
 ]
-app.get(("/book/:id"), (req, res) => {
-    const id = parseInt(req.params.id)
-    const book = bookStore.find(info => info.id === id)
-    res.send(book)
-})
 app.get("/book", (req, res) => {
     res.send(bookStore)
 })
-
-
-app.post("/book", (req, res) => {
-    bookStore.push(req.body)
-    res.send("Data saved successfully")
+app.patch("/book", (req, res) => {
+    res.send("Patch updated")
+    const id1 = req.body.id
+    const Book = bookStore.find(info => info.id === id1)
+    if (req.body.auther) {
+        Book.author = req.body.author
+    }
+    if (req.body.name) {
+        Book.name = req.body.name
+    }
+    console.log(bookStore)
 })
+
 app.listen(3000, () => {
     console.log("server started")
 })
