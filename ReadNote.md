@@ -206,3 +206,18 @@ app.listen(3000, () => {
 <!-- ...................................day 9................................. -->
 ******************************lets create swiggy backned*********************************************
 
+status code=> ![status code](image.png)
+
+
+***********************************lecture10**********************************************
+<!-- try catch ...error  handeling -->
+try{
+
+}
+cath(err){
+    res.send("some error occur")
+}
+
+why we use express.json() ,why not we use  json.parse(JSON) =>?
+ans=>express.json() at the end json.parse(JSON) use karrehe internaily
+
