@@ -151,7 +151,6 @@ app.patch("/book", (req, res) => { // for updating single things  at once we use
     console.log(bookStore)
 })
 app.put("/book", (req, res) => { // for updating multiple things  at once we use it 
-
     const id1 = req.body.id
     const Book = bookStore.find(info => info.id === id1)
     Book.author = req.body.author
@@ -250,18 +249,41 @@ mongoDm=b is  **nosql**
 doccumentation url =>![alt text](image-3.png)
 
 
+**What is mongosh ?**
+=>for better 
 
 
+........................day16.........................
 
 
+***all operaton id db***
 
 
-               
+const mongoose = require("mongoose")
+async function main() {
+    await mongoose.connect("mongodb://localhost:27017/dbLecture16")
+
+    const userSchema = new mongoose.Schema({//cretaimg schema then we need to create model means collection create karna  //schema = structure
+        name: String,
+        age: Number,
+        city: String,
+        gender: String
+    })
+
+    const User = mongoose.model("user", userSchema)//creating model  //no need to write await 
+    // const user1 = new User({ name: "Rohit", age: 20, city: "kolkata", gender: "Male" }) //single insertion line1
+    //   await userMany.save(); //single insertion  line2
+    await User.insertMany([{ name: "Rohit3", age: 20, city: "kolkata", gender: "Male3" },
+    { name: "Rohit2", age: 20, city: "kolkata2", gender: "Male2" }]) //multiple insertion 
+
+    const answer = await User.find({name:"Rohit"}); // find somthing from db
+    console.log(answer)
+
+}
+
+main()
+    .then(() => { console.log("connectd db") })
+    .catch((err) => console.log(err))
 
 
-
-
-
-
-
-
+    
