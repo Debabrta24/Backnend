@@ -240,8 +240,9 @@ mongoDm=b is  **nosql**
 =>yotube is file-stroage system for video 😊😊😊
 =>also store meta data in data base 
 =>meatdata is the information abou photo or video that we store i dbms , only informaton
+<!-- ..................Problem is sql dataBase.................... -->
 
-
+=>ACID => ![this is need to follw in sql dataBase so they follw Banking system ](image-2.png)
 
 
 
