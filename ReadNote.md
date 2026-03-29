@@ -217,7 +217,59 @@ try{
 cath(err){
     res.send("some error occur")
 }
+.......................................................................................................
+                                                                                                      .
+why we use express.json() ,why not we use  json.parse(JSON)                                           .          =>?                                                                                                   .
+ans=>express.json() at the end json.parse(JSON) use karrehe internaily                                .
+                                                                                                      .
+.......................................................................................................
 
-why we use express.json() ,why not we use  json.parse(JSON) =>?
-ans=>express.json() at the end json.parse(JSON) use karrehe internaily
+*******************************dataBase connection************************************
+>excel sheet  fileManager is not a data base cause we not aplly qurryies there excel sheets has limit  
+>dataBse & DBMS me mongodb is DBMS
+Diagram=> ![Photo of dbMs](image-1.png)
+
+
+database is physical system and DBMS is management system
+
+sql=> structure qurry data base means row and colou database 
+mongoDm=b is  **nosql** 
+
+
+=>we store video in file stroage and store link in mongo db ....
+=>yotube is file-stroage system for video 😊😊😊
+=>also store meta data in data base 
+=>meatdata is the information abou photo or video that we store i dbms , only informaton
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
