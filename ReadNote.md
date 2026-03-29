@@ -244,6 +244,10 @@ mongoDm=b is  **nosql**
 
 =>ACID => ![this is need to follw in sql dataBase so they follw Banking system ](image-2.png)
 
+<!-- ...............................lecture150.......................... -->
+=> instlling mongo db commnd in npm=>npm i mongodb
+=> but we dont use this we use moongose
+doccumentation url =>![alt text](image-3.png)
 
 
 
@@ -252,20 +256,7 @@ mongoDm=b is  **nosql**
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+               
 
 
 
