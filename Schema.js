@@ -1,7 +1,7 @@
 const mongoose = require("mongoose") //cretaimg schema then we need to create model means collection create karna  //schema = structure
 
 const userSchema = new mongoose.Schema({   name: String,
-    age: Number,
+    age: {type:Number},
     city: String,
     gender: String
 })
