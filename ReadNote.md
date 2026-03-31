@@ -289,3 +289,11 @@ main()
 
 ***best doccument  for mongo db**
 url is =>![alt text](image-4.png)
+
+
+......................................................
+is authorization is validator ?
+=>no 
+
+?>why need api level validation ?
+=> reason is to reduce db cost & read write operation
