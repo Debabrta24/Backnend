@@ -2,7 +2,8 @@ const express = require("express")
 const app = express()
 const main = require("./database")
 app.use(express.json())
-
+const bcrypt = require("bcrypt")
+const validatorUser = require("./utlitis/validateUser19")
 const User = require("./Schema")
 
 app.get("/register/:id", async (req, res) => {
@@ -36,13 +37,17 @@ app.get("/register", async (req, res) => {
 })
 app.post("/register", async (req, res) => {
     try {
-        // this three line is the api level verification handeling 👇👇👇
-        const mandatoryField = ["firstName", "lastName", "emailId"];
-        const isAllowed = mandatoryField.every((k) => Object.keys(req.body).includes(k));
-        if (!isAllowed) {
-            throw new Error("Fileds missings ")
-        }
-        // & if you write this two  line only it is dataBase side handeling 👇👇 
+        //     // this three line is the api level verification handeling 👇👇👇
+        //     const mandatoryField = ["firstName", "lastName", "emailId"];
+        //     const isAllowed = mandatoryField.every((k) => Object.keys(req.body).includes(k));
+        //     if (!isAllowed) {
+        //         throw new Error("Fileds missings ")
+        //     }
+        //     // & if you write this two  line only it is dataBase side handeling 👇👇 
+
+        validatorUser(req.body)
+        req.body.password = await bcrypt.hash(req.body.password, 10)  //converting passowrd to hash
+        // console.log(req.body)
         await User.create(req.body)
         res.send("User regster successfully")
     }
@@ -51,6 +56,22 @@ app.post("/register", async (req, res) => {
     }
 })
 
+app.post("/login", async (req, res) => {
+    try {
+        // validatorUser(req.body)
+        const people = await User.findById(req.body._id)
+        if (!(req.body.emailId == people.emailId)) {
+            throw new Error("invaild ")
+        }
+        const check = await bcrypt.compare(req.body.password, people.password)
+        if (!check) { throw new Error("invaild ") }
+        // console.log(people)
+        res.send("login done")
+    }
+    catch (err) {
+        console.log(err)
+    }
+})
 app.patch("/user", async (req, res) => {
     try {
         const { _id, ...update } = req.body /// rebenber this must 
