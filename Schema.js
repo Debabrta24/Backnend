@@ -10,13 +10,19 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     emailId: {
-        type: String
+        type: String,
+        unique: true
     },
     password: {
         type: String
     },
     photo: {
         type: String
+    },
+    age: {
+        type: Number,
+        min: 14,
+        max: 70
     }
 })
 const User = mongoose.model("user", userSchema)//creating model  //no need to write await 
