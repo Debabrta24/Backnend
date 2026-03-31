@@ -285,5 +285,7 @@ main()
     .then(() => { console.log("connectd db") })
     .catch((err) => console.log(err))
 
+.......................................................................................
 
-    
+***best doccument  for mongo db**
+url is =>![alt text](image-4.png)

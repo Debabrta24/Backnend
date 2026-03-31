@@ -5,34 +5,86 @@ app.use(express.json())
 
 const User = require("./Schema")
 
-app.get("/info", async (req, res) => {
-    const result = await User.find({})
-    res.send(result)
-})
-app.post("/info", async (req, res) => {
-    try { //alawys put in try catch block 
-
-        // this two line  👇 
-        // const ans = new User(req.body)
-        // await ans.save()
-        // or this  single line 👇
-        await User.create(req.body)
+app.get("/register/:id", async (req, res) => {
+    id = req.params.id
+    try {
+        const result = await User.findById(id)
+        res.send(result)
     }
     catch (err) {
-        res.send(err)
+        cosnole.log(err)
     }
-    res.status(200).send("Sussfully sent")
+})
+app.delete("/register/:id", async (req, res) => {
+    id = req.params.id
+    try {
+        const result = await User.findByIdAndDelete(id)
+        res.send("deleted succ")
+    }
+    catch (err) {
+        cosnole.log(err)
+    }
+})
+app.get("/register", async (req, res) => {
+    try {
+        const result = await User.find({})
+        res.send(result)
+    }
+    catch (err) {
+        cosnole.log(err)
+    }
+})
+app.post("/register", async (req, res) => {
+    try {
+        await User.create(req.body)
+        res.send("User regster successfully")
+    }
+    catch (error) {
+        console.log(error)
+    }
 })
 
-app.delete("/info", async (req, res) => {
-    await User.deleteOne({ "name": "shivam" })
-    res.send("Deleted")
+
+app.patch("/user", async (req, res) => {
+    try {
+        const { _id, ...update } = req.body /// rebenber this must 
+        await User.findByIdAndUpdate(_id,update)
+        res.send("updated")
+    }
+    catch (err) {
+        console.log(err)
+    }
 })
 
-app.put("/info", async (req, res) => {
-    await User.updateOne({ "name": "Rohit" }, { "name": "Dev" })
-    res.send("updated")
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 main()
     .then(() => {
         app.listen(3000, () => {
@@ -44,6 +96,3 @@ main()
     .catch((err) => {
         console.log(err)
     })
-
-
-// 1hour
