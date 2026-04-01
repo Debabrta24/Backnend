@@ -6,6 +6,7 @@ const validatorUser = require("./utlitis/validateUser19")
 const User = require("./Schema")
 const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
+const userAuth = require("./middleWare/userAuth")
 app.use(express.json())
 app.use(cookieParser())
 
@@ -24,6 +25,8 @@ app.get("/register/:id", async (req, res) => {
 app.delete("/register/:id", async (req, res) => {
     id = req.params.id
     try {
+        //need to first validate token 
+
         const result = await User.findByIdAndDelete(id)
         res.send("deleted succ")
     }
@@ -31,12 +34,36 @@ app.delete("/register/:id", async (req, res) => {
         cosnole.log(err)
     }
 })
-app.get("/register", async (req, res) => {
+
+
+
+
+
+
+
+
+
+
+app.get("/register", userAuth, async (req, res) => {
     try {
-        const payload = jwt.verify(req.cookies.token, "secret_key_your")
-        console.log(payload)
-        const result = await User.find({})
-        res.send(result)
+        // const { token } = req.cookies
+        // // console.log(token)
+        // if (!token) {
+        //     throw new Error("token does not exit")
+        // }
+        // const payload = jwt.verify(token, "secret_key_your")
+        // // console.log(payload)
+        // const { _id } = payload;
+        // if (!id) {
+        //     throw new Error("errror id missing ")
+        // }
+        // const result = await User.find({})
+        // if (!result) {
+        //     throw new Error("errror result missing ")
+        // }
+    
+        res.send(req.result)
+       
     }
     catch (err) {
         console.log(err)
@@ -65,16 +92,17 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try {
+       
         // validatorUser(req.body)
         const people = await User.findOne({ "emailId": req.body.emailId })
-      
+
         // if (!(req.body.emailId == people.emailId)) {
         //     throw new Error("invaild ")
         // }
         const check = await bcrypt.compare(req.body.password, people.password)
         if (!check) { throw new Error("invaild ") }
         // console.log(people)
-        const token = jwt.sign({ _id: people._id, emailId: people.emailId }, "secret_key_your",{expiresIn:100})
+        const token = jwt.sign({ _id: people._id, emailId: people.emailId }, "secret_key_your", { expiresIn: 1000 })
         res.cookie("token", token) //cookies 
         res.send("login done")
     }

@@ -333,6 +333,39 @@ app.use(cookieParser())
  //index16.js @21 folder
 
 
+<!-- .....................refreh token .................. -->
+better then jwt , we need to take axcestoken waild very less time , refresh token vaild for very high time 
+
+if passwor dchange then refresh token invaild possible but axcess token not invaild  happen 
+rferesh token has no formate it is only a random string and it is store in dB(rsdis) best if you store in dB as a hash encrypted so that if it is store but then nothing should be happen
+ formate is => **hashcode:wdgywsgydshewafshbgysahf ,name**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
