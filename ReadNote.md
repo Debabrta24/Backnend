@@ -322,11 +322,15 @@ hashingme()
 ...........................validator npm libray.........................
 => it is use for validation in api level
 
+..................cookie-parser....................................
+for that we need to use npm i cookie-parser
+& need to install npm i jsonwebtoken this for token genarator
+>const jwt=require("jsonwebtoken")
+app.use(cookieParser())
+>const token = jwt.sign({ _id: people._id, emailId: people.emailId }, "secret_key_your",{expiresIn:100}) //cookies  genarate  -no meed await here 
+>const cookieParser=require("cookie-parser")
 
-
-
-
-
+ //index16.js @21 folder
 
 
 

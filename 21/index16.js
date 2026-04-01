@@ -1,10 +1,15 @@
 const express = require("express")
 const app = express()
 const main = require("./database")
-app.use(express.json())
 const bcrypt = require("bcrypt")
 const validatorUser = require("./utlitis/validateUser19")
 const User = require("./Schema")
+const cookieParser = require("cookie-parser")
+const jwt = require("jsonwebtoken")
+app.use(express.json())
+app.use(cookieParser())
+
+
 
 app.get("/register/:id", async (req, res) => {
     id = req.params.id
@@ -28,6 +33,8 @@ app.delete("/register/:id", async (req, res) => {
 })
 app.get("/register", async (req, res) => {
     try {
+        const payload = jwt.verify(req.cookies.token, "secret_key_your")
+        console.log(payload)
         const result = await User.find({})
         res.send(result)
     }
@@ -59,19 +66,25 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     try {
         // validatorUser(req.body)
-        const people = await User.findById(req.body._id)
-        if (!(req.body.emailId == people.emailId)) {
-            throw new Error("invaild ")
-        }
+        const people = await User.findOne({ "emailId": req.body.emailId })
+      
+        // if (!(req.body.emailId == people.emailId)) {
+        //     throw new Error("invaild ")
+        // }
         const check = await bcrypt.compare(req.body.password, people.password)
         if (!check) { throw new Error("invaild ") }
         // console.log(people)
+        const token = jwt.sign({ _id: people._id, emailId: people.emailId }, "secret_key_your",{expiresIn:100})
+        res.cookie("token", token) //cookies 
         res.send("login done")
     }
     catch (err) {
         console.log(err)
     }
 })
+
+
+
 app.patch("/user", async (req, res) => {
     try {
         const { _id, ...update } = req.body /// rebenber this must 
