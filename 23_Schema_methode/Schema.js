@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     emailId: {
         type: String,
         unique: true, // check if any double is present or not 
-        lowercase:true //convert all digit in lower caase
+        lowercase: true //convert all digit in lower caase
     },
     password: {
         type: String
@@ -32,10 +32,25 @@ const userSchema = new mongoose.Schema({
         min: 14, // min 
         max: 70 //max
     }
-},{
-    timestamps:true // it save automatically all time
+}, {
+    timestamps: true // it save automatically all time
 })
-const User = mongoose.model("user", userSchema)//creating model  //no need to write await 
+
+// creating methods in schema not so importand check read me file just for interview
+// userSchema.methodes.getJWT = function () {
+//     jwt.sign({_id:this._id,emailId:this.emailId},"YOUR_SECRET_KEY")
+
+// }
+
+
+
+
+
+
+
+
+
+const User = mongoose.model("user", userSchema)//creating model in db  //no need to write await 
 
 
 module.exports = User;

@@ -341,15 +341,11 @@ rferesh token has no formate it is only a random string and it is store in dB(rs
  formate is => **hashcode:wdgywsgydshewafshbgysahf ,name**
 
 
+....................creating methods in schema lecture 23 ..................
+=>no so inportant lecture ...just for extra knowledge
 
 
-
-
-
-
-
-
-
+<!-- need to write this line after installing env require('dotenv').config() -->
 
 
 
