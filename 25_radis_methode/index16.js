@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken")
 const authRouter = require("./Routes/auth")
 const { radisClient, connectRadis } = require("./config/radis")
 const userAuth = require("./middleWare/userAuth")
+const rateLimiter=require("./middleWare/rateLimmtter")
 require('dotenv').config()
 app.use(express.json())
 app.use(cookieParser())
@@ -33,6 +34,7 @@ app.post("/login", async (req, res) => {
         res.send("login done")
         
         // await radisClient.set(`token:${token}`, "Blocked")
+   
     }
     catch (err) {
         console.log(err)

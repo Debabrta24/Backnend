@@ -354,6 +354,40 @@ radis doccumentaion ![alt text](image-5.png)
 we can store data in radis as key valu peer(key:value) but people write like this (key:token:adjajkdbabdad)
 
 
+.......................radis token bucket algo .............................
+fixed wwindow solution
+ek our hai slidding window solution 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
