@@ -9,13 +9,14 @@ const ai = new GoogleGenAI({ apiKey: "AIzaSyC0pI1xNaPN6W9EfYKqmtFMpwKmdH4qXPs" }
 
 
 async function main(msg) {
+    console.log(msg)
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
-        contents: `${msg}`
+        contents: msg
 
 
     });
-    return(response.text);
+    return(response);
 }
 
 module.exports=main
