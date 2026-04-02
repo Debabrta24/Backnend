@@ -1,7 +1,9 @@
 const User = require("../Schema")
 const jwt = require("jsonwebtoken")
+const { radisClient, connectRadis } = require("../config/radis")
 const userAuth = async (req, res, next) => {
     try {
+
         const { token } = req.cookies
         // console.log(token)
         if (!token) {
@@ -17,7 +19,12 @@ const userAuth = async (req, res, next) => {
         if (!result) {
             throw new Error("errror result missing ")
         }
-        req.result=result
+        const isBlocked = await radisClient.exists(`token:${token}`)
+        console.log(isBlocked)
+        if (!isBlocked) {
+            throw new Error("user doesn't exit")
+        }
+        req.result = result
         next()
     }
     catch (err) {

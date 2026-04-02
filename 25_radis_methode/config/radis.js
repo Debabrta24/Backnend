@@ -1,5 +1,5 @@
 const { createClient } = require('redis');
-const cradisClient = createClient({
+const radisClient = createClient({
     username: 'default',
     password: 'hbxwZzvX1w9ElMHNEiFF0NExiK2z9WQf',
     socket: {
@@ -8,9 +8,8 @@ const cradisClient = createClient({
     }
 });
 const connectRadis = async () => {
-    await cradisClient.connect()
+    await radisClient.connect()
     console.log("connect to radis")
 }
-connectRadis()
 
-module.exports = cradisClient
+module.exports = { radisClient, connectRadis }
