@@ -6,4 +6,4 @@ GPT=>Generative pre-trained Trasnform
 MCP sevrver create karo 
 model contaxt protocall
 ai  model cannot give answer of real time data ,here mcp came
-
+need to install npm i readline-sync
