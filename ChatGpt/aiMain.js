@@ -1,10 +1,12 @@
 const { GoogleGenAI } = require("@google/genai")
 const readlineSync = require("readline-sync")
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-const ai = new GoogleGenAI({ apiKey: "AIzaSyAbmzEqhn7sLa15kvRQw0fiqQYP4C7D_40" });
+const ai = new GoogleGenAI({ apiKey: "AIzaSyAcBWUolFfoP9K9rcxuXOSZos7WIXxI5dw" });
 
+
+
+const converstaionHistory = [];
 async function aiMain(msg) {
-    const converstaionHistory = [];
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: converstaionHistory,
@@ -14,12 +16,13 @@ async function aiMain(msg) {
 }
 
 
-//weather  leke jo awega  
+//weather  leke jo awega
+const weatherInfo = []
 
 async function getWeather(location) {
-    const weatherInfo = []
+
     for (const { city, date } of location) {
-        if (Date.toLowerCase() == 'today') {
+        if (date.toLowerCase()== 'today') {
             const response = await fetch(`http://api.weatherapi.com/v1/future.json?key=c05679e2129649ed887145306260304&q=${city}`)
             const data = await response.json();
             weatherInfo.push(data)
@@ -36,10 +39,8 @@ async function getWeather(location) {
 
 
 async function chattting() {
-
-
-
-    const userName = readlineSync.question("May i help you ")
+    const question = readlineSync.question("May i help you ")
+    console.log(question)
     const prompt = `
 You are an AI agent, who will respond to me in JSON format only.
 Analyse the user query and try to fetch city and date details from it.
@@ -69,9 +70,24 @@ JSON format should look like below:
     
 userInput=${question}
 `
-    await History.push({
+    converstaionHistory.push({
         role: "user",
         parts: [{ text: prompt }]
     })
-    console.log(userName)
+    while (true) {
+        const response = await aiMain()
+        const ans = JSON.parse(response)
+        console.log(ans)
+        if (ans.weather_details_needed == false) {
+            console.log(ans.weather_report)
+        }
+        else {
+
+
+            const weatherInfoemation = await getWeather(ans.location)
+            const weatherInfo = JSON.stringify(weatherInfoemation)
+            converstaionHistory.push({ user: 'model', parts: [{ text: `this is the weather report ${weatherInfo}` }] })
+        }
+    }
 }
+chattting()
